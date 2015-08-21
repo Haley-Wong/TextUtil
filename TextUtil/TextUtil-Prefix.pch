@@ -1,0 +1,38 @@
+//
+//  TextUtil-Prefix.pch
+//  TextUtil
+//
+//  Created by zx_04 on 15/8/19.
+//  Copyright (c) 2015年 joker. All rights reserved.
+//
+
+#ifndef TextUtil_TextUtil_Prefix_pch
+#define TextUtil_TextUtil_Prefix_pch
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+
+    #import "JKDBModel.h"
+    #import "UIViewExt.h"
+#endif
+
+#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#define DLog(fmt, ...) nil
+#endif
+
+#define kWidth [UIScreen mainScreen].bounds.size.width //获取设备的物理宽度
+#define kHeight [UIScreen mainScreen].bounds.size.height //获取设备的物理高度
+
+/****************************** 颜色 ********************************/
+#define RGBColor(r,g,b,a) ([UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a])
+/** tableView 边框颜色 */
+#define TABLEVIEW_BORDER_COLOR  RGBColor(230, 230, 230, 1)
+/**所有控制的背景色 */
+#define VIEW_BGCOLOR    RGBColor(240, 240, 240, 1)
+#define cellBlackColor RGBColor(235, 235, 245, 0.7)
+
+
+#endif
