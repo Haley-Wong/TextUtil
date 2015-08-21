@@ -10,13 +10,15 @@
 
 #import "ChatCell.h"
 #import "ChatMessage.h"
-
+#import "YYFaceScrollView.h"
 
 @interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UITableView        *tableView;
+@property (weak, nonatomic) IBOutlet UIView             *bottomView;
+@property (weak, nonatomic) IBOutlet UITextField        *textField;
+/** 表情视图 */
+@property (nonatomic, strong) YYFaceScrollView          *faceView;
 
 @property (nonatomic, strong) NSMutableArray    *messages;
 
@@ -68,31 +70,82 @@
  
     [UIView animateWithDuration:0.3f animations:^{
         // 1、修改输入框视图的位置
-        _bottomView.bottom = kHeight;
+        _bottomView.bottom = kHeight-64;
         // 2、修改表格的高度
         _tableView.height = _bottomView.top;
     }];
 }
 
+- (void)hideKeyBlackBoard:(UITapGestureRecognizer *)tapGesture
+{
+    if (_faceView) {
+        _faceView.top = kHeight-64;
+        _bottomView.top = kHeight-64;
+    }
+    [self.view endEditing:YES];
+    self.textField.text = nil;
+}
+
+- (void)sendMessage:(NSString *)text
+{
+    if (text.length == 0) {
+        return;
+    }
+    ChatMessage *chatMessage = [[ChatMessage alloc] init];
+    chatMessage.isSender = YES;
+    chatMessage.content = text;
+    [chatMessage save];
+     self.textField.text = nil;
+    [_messages addObject:chatMessage];
+    [_tableView reloadData];
+    [self tableViewScrollToBottom];
+}
+
+- (void)tableViewScrollToBottom
+{
+    if (_messages.count > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_messages.count-1) inSection:0];
+        [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
 - (IBAction)emtionClick:(id)sender {
     NSLog(@"%s--emtionClick",__func__);
-//    NSString *content = _textField.text;
-//    ChatMessage *chatMessage = [[ChatMessage alloc] init];
-//    chatMessage.isSender = YES;
-//    chatMessage.content = content;
-//    [chatMessage save];
-//    _textField.text = nil;
+    [self.textField resignFirstResponder];
+    if (_faceView == nil) {
+        __block __weak ChatViewController *this = self;
+        
+        _faceView = [[YYFaceScrollView alloc] initWithSelectBlock:^(NSString *faceName) {
+            NSString *text = this.textField.text;
+            NSString *appendText = [text stringByAppendingString:faceName];
+            this.textField.text = appendText;
+        }];
+        _faceView.backgroundColor = RGBColor(220, 220, 220, 1);
+        _faceView.top = kHeight - 20 - 44;
+        _faceView.clipsToBounds = NO;
+        _faceView.sendBlock = ^{
+            NSString* fullText = this.textField.text;
+            [this sendMessage:fullText];
+            [this hideKeyBlackBoard:nil];
+        };
+        [self.view addSubview:_faceView];
+    }
+    float height = _faceView.height;
+    //设置键盘动画
+    __block CGRect frame;
+    [UIView animateWithDuration:0.3 animations:^{
+        _faceView.top = kHeight - 20 - 44 - height;
+        //调整bottomView的高度
+        self.bottomView.bottom = _faceView.top;
+        frame = _bottomView.frame;
+        self.inputView.frame = frame;
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSString *content = _textField.text;
-    ChatMessage *chatMessage = [[ChatMessage alloc] init];
-    chatMessage.isSender = YES;
-    chatMessage.content = content;
-    [chatMessage save];
-    _textField.text = nil;
+    [self sendMessage:_textField.text];
     return YES;
 }
 
@@ -110,7 +163,7 @@
     [UIView animateWithDuration:duration.doubleValue animations:^{
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:[curve intValue]];
-        CGFloat bottom = kHeight-frame.size.height;
+        CGFloat bottom = kHeight-frame.size.height-64;
         //1.修改输入框View的位置
         _bottomView.bottom = bottom;
         //2.修改tableView的高度

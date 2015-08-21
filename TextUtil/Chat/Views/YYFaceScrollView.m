@@ -71,11 +71,15 @@
     topLine.backgroundColor = [UIColor grayColor];
     [bottomView addSubview:topLine];
     
-    UIButton *smallemoBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 130, bottomView.height)];
+    UIButton *smallemoBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, bottomView.height, bottomView.height)];
     smallemoBtn.backgroundColor = [UIColor clearColor];
-    [smallemoBtn setBackgroundImage:[UIImage imageNamed:@"chatGroup_basic_bt_selected"] forState:UIControlStateNormal];
+    [smallemoBtn setImage:[UIImage imageNamed:@"emotion"] forState:UIControlStateNormal];
     //    [smallemoBtn addTarget:self action:@selector(changeForEmotion) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:smallemoBtn];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(smallemoBtn.right+2, 3, 1, smallemoBtn.height-6)];
+    lineView.backgroundColor = [UIColor grayColor];
+    [bottomView addSubview:lineView];
     
     UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(kWidth-60, 0, 60, bottomView.height)];
     sendBtn.backgroundColor = RGBColor(0, 122, 255, 1);
