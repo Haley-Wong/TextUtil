@@ -82,7 +82,8 @@
     // 1、计算文字的宽高
     float textMaxWidth = kWidth-40-kPadding *2-60; //60是消息框体距离右侧或者左侧的距离
     
-    NSMutableAttributedString *attrStr = [Utility getEmotionStrByString:_message.content];
+//    NSMutableAttributedString *attrStr = [Utility emotionStrWithString:_message.content];
+    NSMutableAttributedString *attrStr = [Utility emotionStrWithString:_message.content plistName:@"emoticons.plist" y:-8];
     [attrStr addAttribute:NSFontAttributeName
                     value:[UIFont systemFontOfSize:kContentFontSize]
                     range:NSMakeRange(0, attrStr.length)];
@@ -138,14 +139,15 @@
     
     float textMaxWidth = kWidth-40-kPadding *2-60; //60是消息框体距离右侧或者左侧的距离
     
-    NSMutableAttributedString *attrStr = [Utility getEmotionStrByString:message.content];
+//    NSMutableAttributedString *attrStr = [Utility emotionStrWithString:message.content];
+    NSMutableAttributedString *attrStr = [Utility emotionStrWithString:message.content plistName:@"emoticons.plist" y:-8];
     [attrStr addAttribute:NSFontAttributeName
                     value:[UIFont systemFontOfSize:kContentFontSize]
                     range:NSMakeRange(0, attrStr.length)];
     CGSize textSize = [attrStr boundingRectWithSize:CGSizeMake(textMaxWidth, CGFLOAT_MAX)
                                             options:NSStringDrawingUsesLineFragmentOrigin
                                             context:nil].size;
-    height += textSize.height;
+    height += (textSize.height+kEdgeInsetsWidth*2);
     
     if (height < 60) {
         height = 60;

@@ -60,34 +60,34 @@
 
 - (void)loadChatRecords
 {
-    _messages = [[NSMutableArray alloc] initWithArray:[ChatMessage findAll]];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSArray *data = [ChatMessage findAll];
+        dispatch_async(dispatch_get_main_queue(), ^{
+             _messages = [[NSMutableArray alloc] initWithArray:data];
+            [_tableView reloadData];
+        });
+    });
 }
 
 /** 取消事件的焦点 */
 - (void)cancelFocus
 {
+    self.textField.text = nil;
     [self.textField resignFirstResponder];
  
     [UIView animateWithDuration:0.3f animations:^{
         // 1、修改输入框视图的位置
         _bottomView.bottom = kHeight-64;
+        // 修改表情视图的位置
+        _faceView.top = kHeight-64;
         // 2、修改表格的高度
         _tableView.height = _bottomView.top;
     }];
 }
 
-- (void)hideKeyBlackBoard:(UITapGestureRecognizer *)tapGesture
-{
-    if (_faceView) {
-        _faceView.top = kHeight-64;
-        _bottomView.top = kHeight-64;
-    }
-    [self.view endEditing:YES];
-    self.textField.text = nil;
-}
-
 - (void)sendMessage:(NSString *)text
 {
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (text.length == 0) {
         return;
     }
@@ -98,6 +98,7 @@
      self.textField.text = nil;
     [_messages addObject:chatMessage];
     [_tableView reloadData];
+    
     [self tableViewScrollToBottom];
 }
 
@@ -126,7 +127,7 @@
         _faceView.sendBlock = ^{
             NSString* fullText = this.textField.text;
             [this sendMessage:fullText];
-            [this hideKeyBlackBoard:nil];
+            [this cancelFocus];
         };
         [self.view addSubview:_faceView];
     }
@@ -168,6 +169,8 @@
         _bottomView.bottom = bottom;
         //2.修改tableView的高度
         _tableView.height = _bottomView.top;
+    } completion:^(BOOL finished) {
+        [self tableViewScrollToBottom];
     }];
 }
 

@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>cht</key>
-		<string>[/微笑]</string>
+		<string>[微笑]</string>
 		<key>png</key>
 		<string>001</string>
 	</dict>
@@ -127,12 +127,6 @@
 		<string>[偷笑]</string>
 		<key>png</key>
 		<string>021</string>
-	</dict>
-	<dict>
-		<key>cht</key>
-		<string>[可爱]</string>
-		<key>png</key>
-		<string>022</string>
 	</dict>
 </array>
 </plist>

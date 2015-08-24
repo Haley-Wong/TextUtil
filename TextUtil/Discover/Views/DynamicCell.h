@@ -17,7 +17,7 @@
 @class Dynamic;
 @interface DynamicCell : UITableViewCell
 
-/** 朋友圈信息实体，原来的板报实体 */
+/** 朋友圈信息实体 */
 @property (nonatomic, retain)   Dynamic      *dynamic;
 
 + (DynamicCell *)cellWithTableView:(UITableView *)tableView;
