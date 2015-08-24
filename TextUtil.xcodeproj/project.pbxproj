@@ -143,6 +143,7 @@
 		6B3A0AB61B84485C00D5241D /* Dynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B3A0AB51B84485C00D5241D /* Dynamic.m */; };
 		6B3A0AB91B84498800D5241D /* DynamicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B3A0AB81B84498800D5241D /* DynamicView.m */; };
 		6B3D74E41B872CBD00BE7ECA /* emotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D74E31B872CBD00BE7ECA /* emotion@2x.png */; };
+		6B3DA4521B8B061F00905EEE /* TextAndPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B3DA4511B8B061F00905EEE /* TextAndPictureViewController.m */; };
 		6B40A57A1B833B1F00A46C7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A5791B833B1F00A46C7C /* main.m */; };
 		6B40A57D1B833B1F00A46C7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B40A57C1B833B1F00A46C7C /* AppDelegate.m */; };
 		6B40A5831B833B1F00A46C7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B40A5811B833B1F00A46C7C /* Main.storyboard */; };
@@ -319,6 +320,8 @@
 		6B3A0AB71B84498800D5241D /* DynamicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicView.h; sourceTree = "<group>"; };
 		6B3A0AB81B84498800D5241D /* DynamicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicView.m; sourceTree = "<group>"; };
 		6B3D74E31B872CBD00BE7ECA /* emotion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emotion@2x.png"; sourceTree = "<group>"; };
+		6B3DA4501B8B061F00905EEE /* TextAndPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextAndPictureViewController.h; sourceTree = "<group>"; };
+		6B3DA4511B8B061F00905EEE /* TextAndPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextAndPictureViewController.m; sourceTree = "<group>"; };
 		6B40A5741B833B1F00A46C7C /* TextUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B40A5781B833B1F00A46C7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B40A5791B833B1F00A46C7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -596,6 +599,8 @@
 			children = (
 				6B3A0A821B8428F100D5241D /* ChatViewController.h */,
 				6B3A0A831B8428F100D5241D /* ChatViewController.m */,
+				6B3DA4501B8B061F00905EEE /* TextAndPictureViewController.h */,
+				6B3DA4511B8B061F00905EEE /* TextAndPictureViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -879,6 +884,7 @@
 			files = (
 				6B38990C1B85BBB30007DB88 /* YYFaceScrollView.m in Sources */,
 				6B40A57D1B833B1F00A46C7C /* AppDelegate.m in Sources */,
+				6B3DA4521B8B061F00905EEE /* TextAndPictureViewController.m in Sources */,
 				6B40A57A1B833B1F00A46C7C /* main.m in Sources */,
 				6B3A0AA71B842BEF00D5241D /* JKDBHelper.m in Sources */,
 				6B3A0A991B8429B300D5241D /* FMDatabase.m in Sources */,

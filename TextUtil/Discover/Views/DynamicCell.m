@@ -25,10 +25,6 @@
 @property (nonatomic, retain) UIView        *lineView;
 /** 点赞视图 */
 @property (nonatomic, retain) UILabel       *praiseLabel;
-/** 查看全部评论 */
-@property (nonatomic, retain) UIButton      *showCommetsBtn;
-/** 底部间距视图 */
-@property (nonatomic, retain) UIView        *bottomView;
 
 @end
 
@@ -84,19 +80,6 @@
     _praiseLabel.font = [UIFont systemFontOfSize:14.0f];
     _praiseLabel.numberOfLines = 0;
     [self.contentView addSubview:_praiseLabel];
-    
-    //显示全部评论按钮
-    _showCommetsBtn = [[UIButton alloc] init];
-    [_showCommetsBtn setTitleColor:customGrayColor forState:UIControlStateNormal];
-    _showCommetsBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    _showCommetsBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [_showCommetsBtn addTarget:self action:@selector(showCommets) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:_showCommetsBtn];
-    
-    //间距视图
-    _bottomView = [[UIView alloc] init];
-    _bottomView.backgroundColor = VIEW_BGCOLOR;
-    [self.contentView addSubview:_bottomView];
 }
 
 /** 初始化操作控件视图 */
@@ -182,8 +165,9 @@
     NSString *praiseCount = [NSString stringWithFormat:@" %d",_dynamic.praiseCount];
     [praiseBtn setTitle:praiseCount forState:UIControlStateNormal];
     
-    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14.0],NSForegroundColorAttributeName:nameColor};
-    NSString *praiseStr = @"路人ABC";
+//    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14.0],NSForegroundColorAttributeName:nameColor};
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14.0]};
+    NSString *praiseStr = @"路人甲、路人乙";
     NSString *praiseInfo = [NSString stringWithFormat:@"<点赞> %@",praiseStr];
     NSDictionary *attributesForAll = @{NSFontAttributeName:[UIFont systemFontOfSize:14.0],NSForegroundColorAttributeName:[UIColor grayColor]};
     NSMutableAttributedString *attrStr = [Utility exchangeString:@"<点赞>" withText:praiseInfo imageName:@"dynamic_love_blue"]; //dynamic_love_blue
