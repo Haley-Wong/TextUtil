@@ -63,7 +63,8 @@
 
 - (void)addbottomView
 {
-    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, pageControl.bottom+10, 320, 35)];
+//    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, pageControl.bottom+10, 320, 35)];
+    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, pageControl.bottom+10, kWidth, 35)];
     bottomView.backgroundColor = [UIColor clearColor];
     [self addSubview:bottomView];
     
@@ -74,7 +75,7 @@
     UIButton *smallemoBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, bottomView.height, bottomView.height)];
     smallemoBtn.backgroundColor = [UIColor clearColor];
     [smallemoBtn setImage:[UIImage imageNamed:@"emotion"] forState:UIControlStateNormal];
-    //    [smallemoBtn addTarget:self action:@selector(changeForEmotion) forControlEvents:UIControlEventTouchUpInside];
+    [smallemoBtn addTarget:self action:@selector(changeForEmotion) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:smallemoBtn];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(smallemoBtn.right+2, 3, 1, smallemoBtn.height-6)];
@@ -95,8 +96,14 @@
     pageControl.currentPage = pageNumber;
 }
 
+- (void)changeForEmotion
+{
+    NSLog(@"%s",__func__);
+}
+
 - (void)sendBtnClick
 {
+    NSLog(@"%s",__func__);
     if (_sendBlock) {
         _sendBlock();
     }
